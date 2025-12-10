@@ -15,7 +15,7 @@ namespace TalentoPlusWeb.Controllers
         // GET: Auth/Login
         public IActionResult Login()
         {
-            // Si ya está logueado, redirigir al portal
+            //If already logged in, redirect to portal
             if (HttpContext.Session.GetString("Token") != null)
             {
                 return RedirectToAction(nameof(Portal));
@@ -37,7 +37,7 @@ namespace TalentoPlusWeb.Controllers
 
             if (result.Success && !string.IsNullOrEmpty(result.Token))
             {
-                // Guardar token en sesión
+                // Store token and user info in session
                 HttpContext.Session.SetString("Token", result.Token);
                 HttpContext.Session.SetString("EmployeeName", result.EmployeeName ?? "");
                 HttpContext.Session.SetString("EmployeeEmail", result.EmployeeEmail ?? "");
@@ -84,7 +84,7 @@ namespace TalentoPlusWeb.Controllers
             return View(model);
         }
 
-        // GET: Auth/Portal (Protegido - requiere sesión)
+        // GET: Auth/Portal (Protected - requires session)
         public async Task<IActionResult> Portal()
         {
             var token = HttpContext.Session.GetString("Token");

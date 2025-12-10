@@ -39,6 +39,18 @@ namespace TalentoPlusWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Employee employee)
         {
+            // Debug: mostrar errores de validación
+            if (!ModelState.IsValid)
+            {
+                foreach (var error in ModelState)
+                {
+                    foreach (var e in error.Value.Errors)
+                    {
+                        Console.WriteLine($"Validation Error - {error.Key}: {e.ErrorMessage}");
+                    }
+                }
+            }
+            
             if (ModelState.IsValid)
             {
                 var result = await _apiService.CreateAsync(employee);

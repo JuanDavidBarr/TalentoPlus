@@ -1,9 +1,9 @@
-# Variables de entorno (credenciales)
+# Environment files
 .env
 .env.local
 .env.*.local
 
-# Carpetas de compilación
+# Compiled files
 **/bin/
 **/obj/
 
@@ -22,7 +22,7 @@
 .DS_Store
 Thumbs.db
 
-# Archivos subidos (uploads)
+# Uploaded files (uploads)
 **/uploads/*.xlsx
 **/uploads/*.xls
 **/uploads/*.pdf

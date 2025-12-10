@@ -20,11 +20,9 @@ namespace TalentoPlus.Controllers
             _resumeService = resumeService;
         }
 
-        // ==================== ENDPOINTS PÚBLICOS ====================
+        // ==================== PUBLIC ENDPOINTS ====================
 
-        /// <summary>
-        /// Lista todos los departamentos disponibles (público)
-        /// </summary>
+        /// List all available departments (public)
         [HttpGet("departments")]
         [AllowAnonymous]
         public async Task<ActionResult<List<DepartmentDto>>> GetDepartments()
@@ -33,9 +31,7 @@ namespace TalentoPlus.Controllers
             return Ok(departments);
         }
 
-        /// <summary>
-        /// Autoregistro de empleado (público)
-        /// </summary>
+        /// Employee self-registration (public)  
         [HttpPost("register")]
         [AllowAnonymous]
         public async Task<ActionResult<EmployeeDto>> SelfRegister([FromBody] SelfRegisterDto dto)
@@ -60,9 +56,7 @@ namespace TalentoPlus.Controllers
             }
         }
 
-        /// <summary>
-        /// Login de empleado (público)
-        /// </summary>
+        /// Employee login (public)
         [HttpPost("login")]
         [AllowAnonymous]
         public async Task<ActionResult<LoginResponseDto>> Login([FromBody] LoginDto dto)
@@ -87,11 +81,9 @@ namespace TalentoPlus.Controllers
             }
         }
 
-        // ==================== ENDPOINTS PROTEGIDOS ====================
+        // ==================== PROTECTED ENDPOINTS ====================
 
-        /// <summary>
-        /// Obtener mi información (protegido con JWT)
-        /// </summary>
+        /// Get my information (protected with JWT)
         [HttpGet("me")]
         [Authorize]
         public async Task<ActionResult<EmployeeDto>> GetMyInfo()
@@ -112,9 +104,7 @@ namespace TalentoPlus.Controllers
             }
         }
 
-        /// <summary>
-        /// Descargar mi hoja de vida en PDF (protegido con JWT)
-        /// </summary>
+        /// Download my resume in PDF (protected with JWT)
         [HttpGet("me/resume")]
         [Authorize]
         public async Task<IActionResult> GetMyResume()

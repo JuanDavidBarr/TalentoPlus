@@ -54,14 +54,12 @@ namespace TalentoPlusWeb.Models
         [Display(Name = "Perfil Profesional")]
         public string ProfessionalProfile { get; set; }
         
-        [Required]
         [Display(Name = "Cargo")]
         public int PositionId { get; set; }
         
         [Display(Name = "Cargo")]
         public string PositionName { get; set; }
         
-        [Required]
         [Display(Name = "Departamento")]
         public int DepartmentId { get; set; }
         

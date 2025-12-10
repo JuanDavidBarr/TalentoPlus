@@ -38,7 +38,7 @@ namespace TalentoPlus.Models
         
         [Required]
         [StringLength(50)]
-        public string Status { get; set; } // Active, Inactive, On Leave
+        public string Status { get; set; }
         
         public decimal Salary { get; set; }
         

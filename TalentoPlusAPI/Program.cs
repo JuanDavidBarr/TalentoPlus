@@ -83,7 +83,7 @@ builder.Services.AddSwaggerGen(options =>
         }
     });
 
-    // Configurar JWT en Swagger
+    // Setup JWT authentication in Swagger
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Description = "JWT Authorization header. Ejemplo: 'Bearer {token}'",
@@ -124,8 +124,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-// Importante: Authentication debe ir antes de Authorization
 app.UseAuthentication();
 app.UseAuthorization();
 

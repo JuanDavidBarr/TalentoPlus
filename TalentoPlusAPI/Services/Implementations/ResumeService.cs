@@ -74,7 +74,7 @@ namespace TalentoPlus.Services.Implementations
             {
                 column.Spacing(15);
 
-                // Datos de Contacto
+                // Contact Information
                 column.Item().Element(c => ComposeSection(c, "Datos de Contacto", content =>
                 {
                     content.Item().Text($"Email: {employee.Email}");
@@ -82,7 +82,7 @@ namespace TalentoPlus.Services.Implementations
                     content.Item().Text($"Dirección: {employee.Address ?? "No especificada"}");
                 }));
 
-                // Datos Personales
+                // Personal Information
                 column.Item().Element(c => ComposeSection(c, "Datos Personales", content =>
                 {
                     content.Item().Text($"Documento: {employee.DocumentNumber}");
@@ -90,7 +90,7 @@ namespace TalentoPlus.Services.Implementations
                     content.Item().Text($"Edad: {CalculateAge(employee.BirthDate)} años");
                 }));
 
-                // Información Laboral
+                // Work Information
                 column.Item().Element(c => ComposeSection(c, "Información Laboral", content =>
                 {
                     content.Item().Text($"Cargo: {employee.Position?.Name ?? "No asignado"}");
@@ -101,13 +101,13 @@ namespace TalentoPlus.Services.Implementations
                     content.Item().Text($"Estado: {employee.Status}");
                 }));
 
-                // Nivel Educativo
+                // Education Level
                 column.Item().Element(c => ComposeSection(c, "Nivel Educativo", content =>
                 {
                     content.Item().Text(employee.EducationLevel ?? "No especificado");
                 }));
 
-                // Perfil Profesional
+                // Professional Profile
                 column.Item().Element(c => ComposeSection(c, "Perfil Profesional", content =>
                 {
                     content.Item().Text(employee.ProfessionalProfile ?? "No especificado")

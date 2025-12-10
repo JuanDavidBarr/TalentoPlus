@@ -41,7 +41,12 @@ namespace TalentoPlusWeb.Services
             var json = JsonSerializer.Serialize(employee, _jsonOptions);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             var response = await _httpClient.PostAsync("api/employees", content);
-            if (!response.IsSuccessStatusCode) return null;
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorContent = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"Error API: {response.StatusCode} - {errorContent}");
+                return null;
+            }
             var responseJson = await response.Content.ReadAsStringAsync();
             return JsonSerializer.Deserialize<Employee>(responseJson, _jsonOptions);
         }

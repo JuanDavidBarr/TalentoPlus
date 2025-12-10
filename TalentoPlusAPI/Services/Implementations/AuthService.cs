@@ -34,7 +34,7 @@ namespace TalentoPlus.Services.Implementations
 
         public async Task<EmployeeDto> SelfRegisterAsync(SelfRegisterDto dto)
         {
-            // Verificar si ya existe un empleado con ese documento o email
+            // Check for existing employee with same document number or email
             var exists = await _context.Employees
                 .AnyAsync(e => e.DocumentNumber == dto.DocumentNumber || e.Email == dto.Email);
 
@@ -43,14 +43,14 @@ namespace TalentoPlus.Services.Implementations
                 throw new InvalidOperationException("Ya existe un empleado con ese documento o correo electrónico.");
             }
 
-            // Verificar que el departamento existe
+            // Check if department exists
             var departmentExists = await _context.Departments.AnyAsync(d => d.Id == dto.DepartmentId);
             if (!departmentExists)
             {
                 throw new InvalidOperationException("El departamento seleccionado no existe.");
             }
 
-            // Crear el empleado
+            // Create new employee
             var employee = new Employee
             {
                 FirstName = dto.FirstName,
@@ -72,10 +72,10 @@ namespace TalentoPlus.Services.Implementations
             _context.Employees.Add(employee);
             await _context.SaveChangesAsync();
 
-            // Enviar correo de bienvenida
+            // Send welcome email
             await _emailService.SendWelcomeEmailAsync(employee.Email, $"{employee.FirstName} {employee.LastName}");
 
-            // Cargar relaciones para el DTO
+            // Load relationships for the DTO
             await _context.Entry(employee).Reference(e => e.Position).LoadAsync();
             await _context.Entry(employee).Reference(e => e.Department).LoadAsync();
 

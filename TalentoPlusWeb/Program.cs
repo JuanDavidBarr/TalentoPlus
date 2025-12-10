@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// Configurar sesiones
+// Configure sessions
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
@@ -14,8 +14,8 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-// Configurar HttpClient para consumir la API
-// Usa variable de entorno o valor por defecto
+// Configure HttpClient to consume the API
+// Use environment variable or default value
 var apiUrl = Environment.GetEnvironmentVariable("API_URL") ?? "http://localhost:5264/";
 builder.Services.AddHttpClient<EmployeeApiService>(client =>
 {
@@ -34,7 +34,7 @@ if (!app.Environment.IsDevelopment())
 app.UseStaticFiles();
 app.UseRouting();
 
-// Habilitar sesiones
+// Enable sessions
 app.UseSession();
 
 app.UseAuthorization();
