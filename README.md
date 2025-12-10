@@ -1,21 +1,19 @@
-# TalentoPlus - Sistema de Gestión de Empleados
+# TalentoPlus - Employee Management System
 
-Sistema completo para la gestión de empleados de TalentoPlus S.A.S., compuesto por una API REST y una aplicación web MVC.
+Complete system for employee management at TalentoPlus S.A.S., composed of a REST API and an MVC web application.
 
-## 🔗 Repositorio
+## 🔗 Repository
 
-[Link del repositorio](https://github.com/TU_USUARIO/TalentoPlus)
-
-> ⚠️ Reemplaza el link con la URL real de tu repositorio.
+[Repository Link](https://github.com/JuanDavidBarr/TalentoPlus)
 
 ---
 
-## 📊 Diagrama Entidad-Relación
+## 📊 Entity-Relationship Diagram
 
 ```mermaid
 erDiagram
-    DEPARTMENT ||--o{ EMPLOYEE : "tiene"
-    POSITION ||--o{ EMPLOYEE : "tiene"
+    DEPARTMENT ||--o{ EMPLOYEE : "has"
+    POSITION ||--o{ EMPLOYEE : "has"
     
     DEPARTMENT {
         int Id PK
@@ -50,34 +48,34 @@ erDiagram
 
 ---
 
-## 👤 Diagrama de Casos de Uso
+## 👤 Use Case Diagram
 
 ```mermaid
 flowchart TB
-    subgraph Actores
-        U[👤 Usuario/Empleado]
-        A[👨‍💼 Administrador]
+    subgraph Actors
+        U[👤 User/Employee]
+        A[👨‍💼 Administrator]
     end
     
-    subgraph "Casos de Uso - Autenticación"
-        CU1[Registrarse]
-        CU2[Iniciar Sesión]
-        CU3[Ver Mi Información]
+    subgraph "Use Cases - Authentication"
+        CU1[Register]
+        CU2[Login]
+        CU3[View My Information]
     end
     
-    subgraph "Casos de Uso - Gestión de Empleados"
-        CU4[Listar Empleados]
-        CU5[Ver Detalle de Empleado]
-        CU6[Crear Empleado]
-        CU7[Editar Empleado]
-        CU8[Eliminar Empleado]
+    subgraph "Use Cases - Employee Management"
+        CU4[List Employees]
+        CU5[View Employee Details]
+        CU6[Create Employee]
+        CU7[Edit Employee]
+        CU8[Delete Employee]
     end
     
-    subgraph "Casos de Uso - Funcionalidades"
-        CU9[Importar desde Excel]
-        CU10[Exportar a Excel]
-        CU11[Generar Hoja de Vida PDF]
-        CU12[Enviar Hoja de Vida por Email]
+    subgraph "Use Cases - Features"
+        CU9[Import from Excel]
+        CU10[Export to Excel]
+        CU11[Generate Resume PDF]
+        CU12[Send Resume by Email]
     end
     
     U --> CU1
@@ -98,69 +96,69 @@ flowchart TB
 
 ---
 
-## 🔄 Diagrama de Flujo - Flujo Principal de la Aplicación
+## 🔄 Flow Diagram - Main Application Flow
 
 ```mermaid
 flowchart TD
-    A[Inicio] --> B{¿Usuario autenticado?}
-    B -->|No| C[Mostrar Login/Registro]
-    C --> D{Acción}
-    D -->|Registrarse| E[Formulario de Registro]
-    E --> F[Validar Datos]
-    F -->|Válido| G[Crear Empleado]
-    G --> H[Enviar Email de Bienvenida]
-    H --> I[Redirigir a Login]
-    F -->|Inválido| E
+    A[Start] --> B{User authenticated?}
+    B -->|No| C[Show Login/Register]
+    C --> D{Action}
+    D -->|Register| E[Registration Form]
+    E --> F[Validate Data]
+    F -->|Valid| G[Create Employee]
+    G --> H[Send Welcome Email]
+    H --> I[Redirect to Login]
+    F -->|Invalid| E
     
-    D -->|Login| J[Formulario Login]
-    J --> K[Validar Credenciales]
-    K -->|Válido| L[Generar JWT Token]
-    L --> M[Acceso al Sistema]
-    K -->|Inválido| J
+    D -->|Login| J[Login Form]
+    J --> K[Validate Credentials]
+    K -->|Valid| L[Generate JWT Token]
+    L --> M[System Access]
+    K -->|Invalid| J
     
-    B -->|Sí| M
-    M --> N[Dashboard de Empleados]
+    B -->|Yes| M
+    M --> N[Employee Dashboard]
     
-    N --> O{Acción del Usuario}
-    O -->|Ver Lista| P[Listar Empleados]
-    O -->|Crear| Q[Formulario Nuevo Empleado]
-    O -->|Editar| R[Formulario Editar Empleado]
-    O -->|Eliminar| S[Confirmar Eliminación]
-    O -->|Importar Excel| T[Subir Archivo Excel]
-    O -->|Exportar Excel| U[Descargar Excel]
-    O -->|Generar PDF| V[Generar Hoja de Vida]
+    N --> O{User Action}
+    O -->|View List| P[List Employees]
+    O -->|Create| Q[New Employee Form]
+    O -->|Edit| R[Edit Employee Form]
+    O -->|Delete| S[Confirm Deletion]
+    O -->|Import Excel| T[Upload Excel File]
+    O -->|Export Excel| U[Download Excel]
+    O -->|Generate PDF| V[Generate Resume]
     
-    Q --> W[Guardar en BD]
+    Q --> W[Save to DB]
     R --> W
-    S --> X[Eliminar de BD]
-    T --> Y[Procesar Excel]
+    S --> X[Delete from DB]
+    T --> Y[Process Excel]
     Y --> W
     
     W --> N
     X --> N
     U --> N
-    V --> Z[Descargar PDF]
+    V --> Z[Download PDF]
     Z --> N
 ```
 
 ---
 
-## 🔄 Diagrama de Flujo - API REST
+## 🔄 Flow Diagram - REST API
 
 ```mermaid
 flowchart LR
-    subgraph Cliente
-        WEB[Web App MVC]
+    subgraph Client
+        WEB[MVC Web App]
     end
     
-    subgraph API[API REST - Puerto 5001]
+    subgraph API[REST API - Port 5001]
         AUTH[AuthController]
         EMP[EmployeesController]
         EXCEL[ExcelImportController]
         RESUME[ResumeController]
     end
     
-    subgraph Servicios
+    subgraph Services
         AS[AuthService]
         ES[EmployeeService]
         EXS[ExcelImportService]
@@ -169,7 +167,7 @@ flowchart LR
         JS[JwtService]
     end
     
-    subgraph Datos
+    subgraph Data
         REPO[EmployeeRepository]
         DB[(PostgreSQL)]
     end
@@ -197,120 +195,120 @@ flowchart LR
 
 ---
 
-## 🚀 Pasos para correr la solución
+## 🚀 Steps to Run the Solution
 
-### Prerrequisitos
+### Prerequisites
 
-- [Docker](https://docs.docker.com/get-docker/) instalado
-- [Docker Compose](https://docs.docker.com/compose/install/) instalado
+- [Docker](https://docs.docker.com/get-docker/) installed
+- [Docker Compose](https://docs.docker.com/compose/install/) installed
 
-### Ejecución
+### Execution
 
-1. **Clonar el repositorio:**
+1. **Clone the repository:**
    ```bash
-   git clone https://github.com/TU_USUARIO/TalentoPlus.git
+   git clone https://github.com/JuanDavidBarr/TalentoPlus.git
    cd TalentoPlus
    ```
 
-2. **Crear el archivo de variables de entorno:**
+2. **Create the environment variables file:**
    ```bash
    cp .env.example .env
    ```
-   > Edita el archivo `.env` con las credenciales proporcionadas (ver sección de configuración).
+   > Edit the `.env` file with the provided credentials (see configuration section).
 
-3. **Levantar los contenedores:**
+3. **Start the containers:**
    ```bash
    docker-compose up --build -d
    ```
 
-4. **Verificar que los contenedores estén corriendo:**
+4. **Verify that containers are running:**
    ```bash
    docker-compose ps
    ```
 
-5. **Acceder a la aplicación:**
+5. **Access the application:**
    - **Web App:** http://localhost:5000
    - **API (Swagger):** http://localhost:5001/swagger
 
-### Comandos útiles
+### Useful Commands
 
 ```bash
-# Ver logs en tiempo real
+# View logs in real time
 docker-compose logs -f
 
-# Detener los contenedores
+# Stop the containers
 docker-compose down
 
-# Reiniciar los contenedores
+# Restart the containers
 docker-compose restart
 ```
 
 ---
 
-## ⚙️ Configuración de Variables de Entorno
+## ⚙️ Environment Variables Configuration
 
-Crear un archivo `.env` en la raíz del proyecto con las siguientes variables:
+Create a `.env` file in the project root with the following variables:
 
 ```env
-# Base de datos
-DB_HOST=<host_de_la_base_de_datos>
+# Database
+DB_HOST=<database_host>
 DB_PORT=5432
-DB_NAME=<nombre_de_la_base_de_datos>
-DB_USER=<usuario>
-DB_PASSWORD=<contraseña>
+DB_NAME=<database_name>
+DB_USER=<username>
+DB_PASSWORD=<password>
 
 # JWT
-JWT_SECRET=<clave_secreta_jwt>
+JWT_SECRET=<jwt_secret_key>
 JWT_ISSUER=TalentoPlusAPI
 JWT_AUDIENCE=TalentoPlusClients
 JWT_EXPIRATION_HOURS=24
 
-# SMTP (para envío de correos)
+# SMTP (for sending emails)
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
-SMTP_USER=<correo>
-SMTP_PASSWORD=<contraseña_de_aplicación>
+SMTP_USER=<email>
+SMTP_PASSWORD=<app_password>
 SMTP_FROM_NAME=Web app - TalentoPlus
-SMTP_FROM_EMAIL=<correo>
+SMTP_FROM_EMAIL=<email>
 ```
 
 ---
 
-## 🔑 Credenciales de Acceso
+## 🔑 Access Credentials
 
-### Base de Datos (PostgreSQL)
+### Database (PostgreSQL)
 
-| Campo    | Valor                     |
+| Field    | Value                     |
 |----------|---------------------------|
 | Host     | 157.90.251.124            |
-| Puerto   | 5432                      |
+| Port     | 5432                      |
 | Database | JuanDavid_Prueba          |
-| Usuario  | riwi_user                 |
+| Username | riwi_user                 |
 | Password | J9YoXTAy77bVPxwMtArRHfXDC |
 
-### Aplicación Web
+### Web Application
 
-| Campo    | Valor                 |
-|----------|-----------------------|
-| URL      | http://localhost:5000 |
+| Field | Value                 |
+|-------|-----------------------|
+| URL   | http://localhost:5000 |
 
 ### API
 
-| Campo   | Valor                         |
+| Field   | Value                         |
 |---------|-------------------------------|
 | URL     | http://localhost:5001         |
 | Swagger | http://localhost:5001/swagger |
 
 ---
 
-## 🏗️ Arquitectura
+## 🏗️ Architecture
 
 ```
 TalentoPlus/
-├── docker-compose.yml          # Orquestación de contenedores
-├── .env                        # Variables de entorno (no versionado)
-├── .env.example                # Plantilla de variables
-├── TalentoPlusAPI/             # API REST (.NET 8)
+├── docker-compose.yml          # Container orchestration
+├── .env                        # Environment variables (not versioned)
+├── .env.example                # Variables template
+├── TalentoPlusAPI/             # REST API (.NET 8)
 │   ├── Controllers/
 │   │   ├── AuthController.cs
 │   │   ├── EmployeesController.cs
@@ -321,7 +319,7 @@ TalentoPlus/
 │   ├── Models/
 │   ├── DTOs/
 │   └── Dockerfile
-└── TalentoPlusWeb/             # Aplicación Web MVC (.NET 8)
+└── TalentoPlusWeb/             # MVC Web Application (.NET 8)
     ├── Controllers/
     ├── Views/
     ├── Services/
@@ -330,24 +328,24 @@ TalentoPlus/
 
 ---
 
-## 📋 Endpoints de la API
+## 📋 API Endpoints
 
-| Método | Endpoint                      | Descripción                    |
-|--------|-------------------------------|--------------------------------|
-| GET    | /api/employees                | Listar todos los empleados     |
-| GET    | /api/employees/{id}           | Obtener empleado por ID        |
-| POST   | /api/employees                | Crear nuevo empleado           |
-| PUT    | /api/employees/{id}           | Actualizar empleado            |
-| DELETE | /api/employees/{id}           | Eliminar empleado              |
-| POST   | /api/auth/register            | Autoregistro de empleado       |
-| POST   | /api/auth/login               | Iniciar sesión                 |
-| GET    | /api/auth/departments         | Listar departamentos           |
-| POST   | /api/excelimport/upload       | Importar empleados desde Excel |
-| GET    | /api/resume/employee/{id}     | Generar hoja de vida PDF       |
+| Method | Endpoint                  | Description                |
+|--------|---------------------------|----------------------------|
+| GET    | /api/employees            | List all employees         |
+| GET    | /api/employees/{id}       | Get employee by ID         |
+| POST   | /api/employees            | Create new employee        |
+| PUT    | /api/employees/{id}       | Update employee            |
+| DELETE | /api/employees/{id}       | Delete employee            |
+| POST   | /api/auth/register        | Employee self-registration |
+| POST   | /api/auth/login           | Login                      |
+| GET    | /api/auth/departments     | List departments           |
+| POST   | /api/excelimport/upload   | Import employees from Excel|
+| GET    | /api/resume/employee/{id} | Generate resume PDF        |
 
 ---
 
-## 👤 Autor
+## 👤 Author
 
-- **Nombre:** Juan David
-- **Proyecto:** Prueba Técnica TalentoPlus
+- **Name:** Juan David
+- **Project:** TalentoPlus Technical Test
