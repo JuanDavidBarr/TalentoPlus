@@ -1,0 +1,115 @@
+@model TalentoPlusWeb.Services.SelfRegisterModel
+@{
+    ViewData["Title"] = "Registro de Empleado";
+    var departments = ViewBag.Departments as List<TalentoPlusWeb.Services.Department> ?? new List<TalentoPlusWeb.Services.Department>();
+}
+
+<div class="row justify-content-center mt-4">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-header bg-success text-white">
+                <h4 class="mb-0">
+                    <i class="bi bi-person-plus"></i> Registro de Empleado
+                </h4>
+            </div>
+            <div class="card-body">
+                <p class="text-muted">
+                    Complete el formulario para registrarse en el sistema. Recibirá un correo de confirmación.
+                </p>
+
+                <form asp-action="Register" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <h5 class="border-bottom pb-2 mb-3">Información Personal</h5>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="FirstName" class="form-label">Nombre *</label>
+                            <input asp-for="FirstName" class="form-control" required />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="LastName" class="form-label">Apellido *</label>
+                            <input asp-for="LastName" class="form-control" required />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="DocumentNumber" class="form-label">Número de Documento *</label>
+                            <input asp-for="DocumentNumber" class="form-control" required />
+                            <span asp-validation-for="DocumentNumber" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Email" class="form-label">Correo Electrónico *</label>
+                            <input asp-for="Email" class="form-control" type="email" required />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Phone" class="form-label">Teléfono</label>
+                            <input asp-for="Phone" class="form-control" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="BirthDate" class="form-label">Fecha de Nacimiento *</label>
+                            <input asp-for="BirthDate" class="form-control" type="date" required />
+                            <span asp-validation-for="BirthDate" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Address" class="form-label">Dirección</label>
+                        <input asp-for="Address" class="form-control" />
+                    </div>
+
+                    <h5 class="border-bottom pb-2 mb-3 mt-4">Información Profesional</h5>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="DepartmentId" class="form-label">Departamento *</label>
+                            <select asp-for="DepartmentId" class="form-control" required>
+                                <option value="">Seleccione un departamento...</option>
+                                @foreach (var dept in departments)
+                                {
+                                    <option value="@dept.Id">@dept.Name</option>
+                                }
+                            </select>
+                            <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="EducationLevel" class="form-label">Nivel Educativo</label>
+                            <select asp-for="EducationLevel" class="form-control">
+                                <option value="">Seleccione...</option>
+                                <option value="Bachiller">Bachiller</option>
+                                <option value="Técnico">Técnico</option>
+                                <option value="Tecnólogo">Tecnólogo</option>
+                                <option value="Profesional">Profesional</option>
+                                <option value="Especialización">Especialización</option>
+                                <option value="Maestría">Maestría</option>
+                                <option value="Doctorado">Doctorado</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="ProfessionalProfile" class="form-label">Perfil Profesional</label>
+                        <textarea asp-for="ProfessionalProfile" class="form-control" rows="3" 
+                                  placeholder="Describe tu experiencia y habilidades..."></textarea>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-4">
+                        <a asp-action="Login" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left"></i> Volver al Login
+                        </a>
+                        <button type="submit" class="btn btn-success btn-lg">
+                            <i class="bi bi-check-circle"></i> Registrarse
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

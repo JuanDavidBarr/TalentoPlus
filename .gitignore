@@ -1,0 +1,31 @@
+# Variables de entorno (credenciales)
+.env
+.env.local
+.env.*.local
+
+# Carpetas de compilación
+**/bin/
+**/obj/
+
+# IDE
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+
+# Logs
+*.log
+**/[Ll]ogs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Archivos subidos (uploads)
+**/uploads/*.xlsx
+**/uploads/*.xls
+**/uploads/*.pdf
+
+# Docker
+**/docker-compose.override.yml

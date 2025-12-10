@@ -1,0 +1,81 @@
+@model TalentoPlusWeb.Models.Employee
+
+@{
+    ViewData["Title"] = "Detalles del Empleado";
+}
+
+<h1>Detalles del Empleado</h1>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="card">
+    <div class="card-header">
+        <h4>@Model.FirstName @Model.LastName</h4>
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Documento</dt>
+            <dd class="col-sm-9">@Model.DocumentNumber</dd>
+
+            <dt class="col-sm-3">Email</dt>
+            <dd class="col-sm-9">@Model.Email</dd>
+
+            <dt class="col-sm-3">Teléfono</dt>
+            <dd class="col-sm-9">@Model.Phone</dd>
+
+            <dt class="col-sm-3">Fecha de Nacimiento</dt>
+            <dd class="col-sm-9">@Model.BirthDate.ToString("dd/MM/yyyy")</dd>
+
+            <dt class="col-sm-3">Dirección</dt>
+            <dd class="col-sm-9">@Model.Address</dd>
+
+            <dt class="col-sm-3">Fecha de Contratación</dt>
+            <dd class="col-sm-9">@Model.HireDate.ToString("dd/MM/yyyy")</dd>
+
+            <dt class="col-sm-3">Estado</dt>
+            <dd class="col-sm-9">
+                @if (Model.Status == "Activo")
+                {
+                    <span class="badge bg-success">@Model.Status</span>
+                }
+                else
+                {
+                    <span class="badge bg-secondary">@Model.Status</span>
+                }
+            </dd>
+
+            <dt class="col-sm-3">Salario</dt>
+            <dd class="col-sm-9">@Model.Salary.ToString("C")</dd>
+
+            <dt class="col-sm-3">Nivel Educativo</dt>
+            <dd class="col-sm-9">@Model.EducationLevel</dd>
+
+            <dt class="col-sm-3">Perfil Profesional</dt>
+            <dd class="col-sm-9">@Model.ProfessionalProfile</dd>
+
+            <dt class="col-sm-3">Cargo</dt>
+            <dd class="col-sm-9">@Model.PositionName</dd>
+
+            <dt class="col-sm-3">Departamento</dt>
+            <dd class="col-sm-9">@Model.DepartmentName</dd>
+        </dl>
+    </div>
+</div>
+
+<div class="mt-3">
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+        <i class="bi bi-pencil"></i> Editar
+    </a>
+    <a asp-controller="ImportExport" asp-action="DownloadResume" asp-route-id="@Model.Id" class="btn btn-danger">
+        <i class="bi bi-file-pdf"></i> Descargar Hoja de Vida (PDF)
+    </a>
+    <a asp-action="Index" class="btn btn-secondary">
+        <i class="bi bi-arrow-left"></i> Volver
+    </a>
+</div>
